@@ -6204,23 +6204,18 @@ w_metadata comctl32 dlls \
     publisher="Microsoft" \
     year="2001" \
     media="download" \
-    file1="CC32inst.exe" \
+    file1="../win7sp1/windows6.1-KB976932-X86.exe" \
     installed_file1="${W_SYSTEM32_DLLS_WIN}/comctl32.dll"
 
 load_comctl32()
 {
-    # Microsoft has removed. Mirrors can be found at http://www.filewatcher.com/m/CC32inst.exe.587496-0.html
-    # 2011/01/17: https://www.microsoft.com/en-us/download/details.aspx?id=14672
-    # 2012/08/11: w_download https://download.microsoft.com/download/platformsdk/redist/5.80.2614.3600/w9xnt4/en-us/cc32inst.exe d68c0cca721870aed39f5f2efd80dfb74f3db66d5f9a49e7578b18279edfa4a7
-    # 2016/01/07: w_download ftp://ftp.ie.debian.org/disk1/download.sourceforge.net/pub/sourceforge/p/po/pocmin/Win%2095_98%20Controls/Win%2095_98%20Controls/CC32inst.exe
-    # 2017/03/12: w_download https://downloads.sourceforge.net/project/pocmin/Win%2095_98%20Controls/Win%2095_98%20Controls/CC32inst.exe
+    helper_win7sp1 x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7601.17514_none_41e6975e2bd6f2b2/comctl32.dll
+    w_try_cp_dll "${W_TMP}/x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7601.17514_none_41e6975e2bd6f2b2/comctl32.dll" "${W_SYSTEM32_DLLS}/comctl32.dll"
 
-    w_download https://downloads.sourceforge.net/project/pocmin/Win%2095_98%20Controls/Win%2095_98%20Controls/CC32inst.exe d68c0cca721870aed39f5f2efd80dfb74f3db66d5f9a49e7578b18279edfa4a7
-
-    w_try "${WINE}" "${W_CACHE}/${W_PACKAGE}/${file1}" "/T:${W_TMP_WIN}" /c ${W_OPT_UNATTENDED:+/q}
-    w_try_unzip "${W_TMP}" "${W_TMP}"/comctl32.exe
-    w_try "${WINE}" "${W_TMP}"/x86/50ComUpd.Exe "/T:${W_TMP_WIN}" /c ${W_OPT_UNATTENDED:+/q}
-    w_try_cp_dll "${W_TMP}"/comcnt.dll "${W_SYSTEM32_DLLS}"/comctl32.dll
+    if [ "${W_ARCH}" = "win64" ]; then
+        helper_win7sp1_x64 amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7601.17514_none_fa396087175ac9ac/comctl32.dll
+        w_try_cp_dll "${W_TMP}/amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7601.17514_none_fa396087175ac9ac/comctl32.dll" "${W_SYSTEM64_DLLS}/comctl32.dll"
+    fi
 
     w_override_dlls native,builtin comctl32
 

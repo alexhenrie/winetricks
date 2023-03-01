@@ -12055,13 +12055,10 @@ w_metadata rpcrt4 dlls \
 
 load_rpcrt4()
 {
-    helper_win7sp1 x86_microsoft-windows-rpc-local_31bf3856ad364e35_6.1.7601.17514_none_b6020902a356686a/rpcrt4.dll
-    w_try_cp_dll "${W_TMP}/x86_microsoft-windows-rpc-local_31bf3856ad364e35_6.1.7601.17514_none_b6020902a356686a/rpcrt4.dll" "${W_SYSTEM32_DLLS}/rpcrt4.dll"
-
-    if [ "${W_ARCH}" = "win64" ]; then
-        helper_win7sp1_x64 amd64_microsoft-windows-rpc-local_31bf3856ad364e35_6.1.7601.17514_none_1220a4865bb3d9a0/rpcrt4.dll
-        w_try_cp_dll "${W_TMP}/amd64_microsoft-windows-rpc-local_31bf3856ad364e35_6.1.7601.17514_none_1220a4865bb3d9a0/rpcrt4.dll" "${W_SYSTEM64_DLLS}/rpcrt4.dll"
-    fi
+    #helper_win7sp1 x86_microsoft-windows-rpc-local_31bf3856ad364e35_6.1.7601.17514_none_b6020902a356686a/rpcrt4.dll
+    #w_try_cp_dll "${W_TMP}/x86_microsoft-windows-rpc-local_31bf3856ad364e35_6.1.7601.17514_none_b6020902a356686a/rpcrt4.dll" "${W_SYSTEM32_DLLS}/rpcrt4.dll"
+    helper_winxpsp3 i386/setupapi.dl_
+    w_try_cabextract --directory="${W_SYSTEM32_DLLS}" "${W_TMP}"/i386/setupapi.dl_
 
     w_override_dlls native,builtin rpcrt4
 }

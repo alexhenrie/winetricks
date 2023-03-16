@@ -11441,6 +11441,53 @@ load_msxml6()
 
 #----------------------------------------------------------------
 
+w_metadata netapi dlls \
+    title="MS Network Management (logoncli.dll, netapi32.dll, samcli.dll, wkscli.dll)" \
+    publisher="Microsoft" \
+    year="2011" \
+    media="download" \
+    file1="../win7sp1/windows6.1-KB976932-X86.exe" \
+    installed_file1="${W_SYSTEM32_DLLS_WIN}/netapi32.dll" \
+    installed_file2="${W_SYSTEM32_DLLS_WIN}/wksapi.dll"
+
+load_netapi()
+{
+    helper_win7sp1 x86_microsoft-windows-s..ity-netlogon-netapi_31bf3856ad364e35_6.1.7601.17514_none_d53d54cbb43c056c/logoncli.dll
+    w_try_cp_dll "${W_TMP}/x86_microsoft-windows-s..ity-netlogon-netapi_31bf3856ad364e35_6.1.7601.17514_none_d53d54cbb43c056c/logoncli.dll" "${W_SYSTEM32_DLLS}/logoncli.dll"
+
+    helper_win7sp1 x86_microsoft-windows-netapi32_31bf3856ad364e35_6.1.7601.17514_none_8f3b84fe5fd1f73d/netapi32.dll
+    w_try_cp_dll "${W_TMP}/x86_microsoft-windows-netapi32_31bf3856ad364e35_6.1.7601.17514_none_8f3b84fe5fd1f73d/netapi32.dll" "${W_SYSTEM32_DLLS}/netapi32.dll"
+
+    helper_win7sp1 x86_microsoft-windows-netutils_31bf3856ad364e35_6.1.7601.17514_none_3220778aa85afd05/netutils.dll
+    w_try_cp_dll "${W_TMP}/x86_microsoft-windows-netutils_31bf3856ad364e35_6.1.7601.17514_none_3220778aa85afd05/netutils.dll" "${W_SYSTEM32_DLLS}/netutils.dll"
+
+    helper_win7sp1 x86_microsoft-windows-d..services-sam-netapi_31bf3856ad364e35_6.1.7601.17514_none_88c9aa75246d2ded/samcli.dll
+    w_try_cp_dll "${W_TMP}/x86_microsoft-windows-d..services-sam-netapi_31bf3856ad364e35_6.1.7601.17514_none_88c9aa75246d2ded/samcli.dll" "${W_SYSTEM32_DLLS}/samcli.dll"
+
+    helper_win7sp1 x86_microsoft-windows-w..ationservice-netapi_31bf3856ad364e35_6.1.7601.17514_none_7782c0a6137358e7/wkscli.dll
+    w_try_cp_dll "${W_TMP}/x86_microsoft-windows-w..ationservice-netapi_31bf3856ad364e35_6.1.7601.17514_none_7782c0a6137358e7/wkscli.dll" "${W_SYSTEM32_DLLS}/wkscli.dll"
+
+    if [ "${W_ARCH}" = "win64" ]; then
+        helper_win7sp1_x64 amd64_microsoft-windows-s..ity-netlogon-netapi_31bf3856ad364e35_6.1.7601.17514_none_315bf04f6c9976a2/logoncli.dll
+        w_try_cp_dll "${W_TMP}/amd64_microsoft-windows-s..ity-netlogon-netapi_31bf3856ad364e35_6.1.7601.17514_none_315bf04f6c9976a2/logoncli.dll" "${W_SYSTEM64_DLLS}/logoncli.dll"
+
+        helper_win7sp1_x64 amd64_microsoft-windows-netapi32_31bf3856ad364e35_6.1.7601.17514_none_eb5a2082182f6873/netapi32.dll
+        w_try_cp_dll "${W_TMP}/amd64_microsoft-windows-netapi32_31bf3856ad364e35_6.1.7601.17514_none_eb5a2082182f6873/netapi32.dll" "${W_SYSTEM64_DLLS}/netapi32.dll"
+
+        helper_win7sp1_x64 amd64_microsoft-windows-netutils_31bf3856ad364e35_6.1.7601.17514_none_8e3f130e60b86e3b/netutils.dll
+        w_try_cp_dll "${W_TMP}/amd64_microsoft-windows-netutils_31bf3856ad364e35_6.1.7601.17514_none_8e3f130e60b86e3b/netutils.dll" "${W_SYSTEM64_DLLS}/netutils.dll"
+
+        helper_win7sp1_x64 x86_microsoft-windows-d..services-sam-netapi_31bf3856ad364e35_6.1.7601.17514_none_88c9aa75246d2ded/samcli.dll
+        w_try_cp_dll "${W_TMP}/x86_microsoft-windows-d..services-sam-netapi_31bf3856ad364e35_6.1.7601.17514_none_88c9aa75246d2ded/samcli.dll" "${W_SYSTEM64_DLLS}/samcli.dll"
+
+        helper_win7sp1_x64 amd64_microsoft-windows-w..ationservice-netapi_31bf3856ad364e35_6.1.7601.17514_none_d3a15c29cbd0ca1d/wkscli.dll
+        w_try_cp_dll "${W_TMP}/amd64_microsoft-windows-w..ationservice-netapi_31bf3856ad364e35_6.1.7601.17514_none_d3a15c29cbd0ca1d/wkscli.dll" "${W_SYSTEM64_DLLS}/wkscli.dll"
+    fi
+
+    w_override_dlls native,builtin netapi32
+}
+#----------------------------------------------------------------
+
 w_metadata nuget dlls \
     title="NuGet Package manager" \
     publisher="Outercurve Foundation" \

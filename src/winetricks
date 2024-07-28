@@ -11265,6 +11265,24 @@ load_iertutil()
 
 #----------------------------------------------------------------
 
+w_metadata inkobj dlls \
+    title="MS inkobj.dll" \
+    publisher="Microsoft" \
+    year="2008" \
+    media="download" \
+    file1="../winxpsp3/WindowsXP-KB936929-SP3-x86-ENU.exe" \
+    installed_file1="${W_SYSTEM32_DLLS_WIN}/inkobj.dll"
+
+load_inkobj()
+{
+    helper_winxpsp3 i386/root/cmpnents/tabletpc/i386/inkobj.dl_
+    w_try_cabextract --directory="${W_SYSTEM32_DLLS}" "${W_TMP}"/i386/root/cmpnents/tabletpc/i386/inkobj.dl_
+    w_override_dlls native,builtin inkobj
+    w_try_regsvr inkobj.dll
+}
+
+#----------------------------------------------------------------
+
 w_metadata itircl dlls \
     title="MS itircl.dll" \
     publisher="Microsoft" \
